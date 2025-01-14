@@ -26,8 +26,8 @@ system.membus = SystemXBar()
 
 # Create a simple X86 Atomic CPU
 system.cpu = X86AtomicSimpleCPU()
-system.icache_port = system.membus.cpu_side_ports
-system.dcache_port = system.membus.cpu_side_ports
+system.cpu.icache_port = system.membus.cpu_side_ports
+system.cpu.dcache_port = system.membus.cpu_side_ports
 
 # Create an interrupt controller
 system.cpu.createInterruptController()
