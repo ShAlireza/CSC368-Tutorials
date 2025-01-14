@@ -1,3 +1,4 @@
+import sys
 import m5
 from m5.objects import (
     AddrRange,
@@ -43,7 +44,9 @@ system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
 # Setup a process
-binary = "/u/csc368h/winter/pub/workloads/hello"
+binary = sys.argv[1] if len(sys.argv) > 1 else None
+if not binary:
+    binary = "/u/csc368h/winter/pub/workloads/hello"
 
 system.workload = SEWorkload.init_compatible(binary)
 
