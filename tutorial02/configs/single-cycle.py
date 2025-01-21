@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("binary", help="Binary to run", default="/u/csc368h/winter/pub/workloads/hello")
 parser.add_argument("-a", "--binary_args", help="Arguments to pass to the binary", required=False)
 
-parser.parse_args()
+args = parser.parse_args()
 
 system = System()
 
@@ -51,10 +51,10 @@ system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
 # Setup a process
-system.workload = SEWorkload.init_compatible(parser.binary)
+system.workload = SEWorkload.init_compatible(args.binary)
 
 process = Process()
-process.cmd = [parser.binary, parser.binary_args]
+process.cmd = [args.binary, args.binary_args]
 system.cpu.workload = process
 system.cpu.createThreads()
 
