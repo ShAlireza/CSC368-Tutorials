@@ -12,7 +12,7 @@ from m5.objects import (
     System,
     SystemXBar,
     VoltageDomain,
-    X86TimingSimpleCPU,
+    X86MinorCPU,
 )
 
 # Add Parse arguments
@@ -34,7 +34,7 @@ system.mem_mode = "timing"
 system.membus = SystemXBar()
 
 # Create a simple X86 Timing CPU
-system.cpu = X86TimingSimpleCPU()
+system.cpu = X86MinorCPU()
 system.cpu.icache_port = system.membus.cpu_side_ports
 system.cpu.dcache_port = system.membus.cpu_side_ports
 
