@@ -8,12 +8,12 @@ from m5.objects import (
     Process,
     Root,
     SEWorkload,
+    SimpleCache,
     SrcClockDomain,
     System,
     SystemXBar,
     VoltageDomain,
     X86MinorCPU,
-    SimpleCache,
 )
 
 # Add Parse arguments
@@ -25,13 +25,6 @@ args = parser.parse_args()
 
 system = System()
 
-
-# Cache Setup
-system.cache = SimpleCache(size='1kB')
-
-system.cpu.icache_port = system.cache.cpu_side
-system.cpu.dcache_port = system.cache.cpu_side
-system.cache.mem_side = system.membus.cpu_side_ports
 
 # Set clock domain and voltage domain
 system.clk_domain = SrcClockDomain()
@@ -46,6 +39,14 @@ system.membus = SystemXBar()
 system.cpu = X86MinorCPU()
 system.cpu.icache_port = system.membus.cpu_side_ports
 system.cpu.dcache_port = system.membus.cpu_side_ports
+
+# Cache Setup
+system.cache = SimpleCache(size="1kB")
+
+system.cpu.icache_port = system.cache.cpu_side
+system.cpu.dcache_port = system.cache.cpu_side
+system.cache.mem_side = system.membus.cpu_side_ports
+
 
 # Create an interrupt controller
 system.cpu.createInterruptController()
