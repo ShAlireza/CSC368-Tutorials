@@ -37,8 +37,8 @@ system.membus = SystemXBar()
 
 # Create a simple X86 Timing CPU
 system.cpu = X86MinorCPU()
-system.cpu.icache_port = system.membus.cpu_side_ports
-system.cpu.dcache_port = system.membus.cpu_side_ports
+# system.cpu.icache_port = system.membus.cpu_side_ports
+# system.cpu.dcache_port = system.membus.cpu_side_ports
 
 # Cache Setup
 system.cache = SimpleCache(size="1kB")
